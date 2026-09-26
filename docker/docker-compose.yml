@@ -1,0 +1,7 @@
+name: runpi-rathrest
+services:
+  web:
+    build: .
+    container_namee: runpi-rathrest
+    volumes: 
+      - ../src:/var/www/rathrest:z
