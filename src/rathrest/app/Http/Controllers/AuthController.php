@@ -17,10 +17,11 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username'   => 'required|string|min:4|max:23|unique:login,userid',
-            'password' => 'required|string|min:4|max:31',
-            'email'    => 'nullable|email|max:39',
-            'sex'      => 'required|in:M,F',
+            'username'  => 'required|string|min:4|max:23|unique:login,userid',
+            'password'  => 'required|string|min:4|max:31',
+            'email'     => 'nullable|email|max:39',
+            'gender'    => 'required|in:M,F',
+            'birthdate' => 'nullable|date_format:Y-m-d',
         ]);
 
         if ($validator->fails()) {
@@ -34,8 +35,10 @@ class AuthController extends Controller
             'userid'    => $request->username,
             'user_pass' => md5($request->password),
             'email'     => $request->email ?? 'a@a.com', // rAthena default fallback
-            'sex'       => $request->sex,
+            'sex'       => $request->gender,
+            'birthdate' => $request->birthdate,
             'group_id'  => 0, // default = normal player
+
         ]);
 
         return response()->json([

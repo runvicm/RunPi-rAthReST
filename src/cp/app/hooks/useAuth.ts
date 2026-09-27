@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 const BACKEND_URL = "http://localhost:8000"; // 👈 browser-reachable URL, adjust to your mapped port
 
-type LoginErrorResponse = {
+type ErrorResponseProps = {
   message?: string;
   errors?: Record<string, string[]>;
 };
@@ -48,7 +48,7 @@ export function useAuth() {
           body: JSON.stringify({ username, password }),
         });
 
-        const data = (await res.json()) as LoginErrorResponse;
+        const data = (await res.json()) as ErrorResponseProps;
 
         if (!res.ok) {
           setError(data.message || "Login failed");
@@ -56,6 +56,60 @@ export function useAuth() {
         }
 
         navigate("/account");
+        return true;
+      } catch (err) {
+        setError("Network error — please try again");
+        return false;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [navigate],
+  );
+
+  const register = useCallback(
+    async (
+      username: string,
+      password: string,
+      email: string,
+      gender: string,
+      birthdate: string | null,
+    ) => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        await fetch(`${BACKEND_URL}/sanctum/csrf-cookie`, {
+          credentials: "include",
+        });
+
+        const xsrfToken = getCookie("XSRF-TOKEN");
+
+        const res = await fetch(`${BACKEND_URL}/api/auth/register`, {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-XSRF-TOKEN": xsrfToken,
+          },
+          body: JSON.stringify({
+            username,
+            password,
+            email,
+            gender,
+            birthdate,
+          }),
+        });
+
+        const data = (await res.json()) as ErrorResponseProps;
+
+        if (!res.ok) {
+          setError(data.message || "Registration Failed");
+          return false;
+        }
+
+        navigate("/auth/login");
         return true;
       } catch (err) {
         setError("Network error — please try again");
@@ -92,5 +146,5 @@ export function useAuth() {
     }
   }, [navigate]);
 
-  return { login, logout, loading, error };
+  return { login, logout, register, loading, error };
 }

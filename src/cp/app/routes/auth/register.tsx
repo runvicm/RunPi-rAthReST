@@ -1,20 +1,34 @@
 import React from "react";
+import { useAuth } from "~/hooks/useAuth";
 
 export default function Register() {
+  const { register, loading, error } = useAuth();
+
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    await register(
+      formData.get("username") as string,
+      formData.get("password") as string,
+      formData.get("email") as string,
+      formData.get("gender") as string,
+      formData.get("birthdate") as string | null,
+    );
+  }
+
   return (
     <form
       method="post"
       className="card bg-base-200 border border-base-300 "
-      // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
     >
       <div className="card-body gap-3">
-        {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
         <fieldset className="fieldset">
           <label className="label" htmlFor="username">
             Username
           </label>
-
           <input
             type="text"
             id="username"
@@ -41,7 +55,7 @@ export default function Register() {
             Confirm Password
           </label>
           <input
-            type="confirm_password"
+            type="password"
             name="confirm_password"
             className="input"
             placeholder="Confirm Password"
@@ -76,37 +90,31 @@ export default function Register() {
           <legend className="label mb-2">Gender</legend>
           <div className="flex gap-4">
             <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="radio"
-                name="gender"
-                value="male"
-                className="radio"
-              />
+              <input type="radio" name="gender" value="M" className="radio" />
               <span>Male</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="radio"
-                name="gender"
-                value="female"
-                className="radio"
-              />
+              <input type="radio" name="gender" value="F" className="radio" />
               <span>Female</span>
             </label>
           </div>
         </fieldset>
 
         <fieldset className="fieldset">
-          <legend className="fieldset-legend">Date of Birth</legend>
-          <input type="date" className="input input-bordered w-full max-w-xs" />
+          <legend className="label mb-2">Date of Birth</legend>
+          <input
+            type="date"
+            name="birthdate"
+            className="input input-bordered w-full max-w-xs"
+          />
         </fieldset>
 
         <button
           type="submit"
           className="btn btn-primary mt-2 btn-wide"
-          // disabled={loading}
+          disabled={loading}
         >
-          {/* {loading ? "Logging in..." : "Log in"} */} Create my Account
+          {loading ? "Creating account..." : "Create my Account"}
         </button>
       </div>
     </form>

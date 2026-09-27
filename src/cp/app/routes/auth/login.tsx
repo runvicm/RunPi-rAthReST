@@ -1,11 +1,9 @@
-import { Form, redirect, useActionData } from "react-router";
-import type { Route } from "./+types/login";
 import { useAuth } from "~/hooks/useAuth";
 
 export default function Login() {
   const { login, loading, error } = useAuth();
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     await login(

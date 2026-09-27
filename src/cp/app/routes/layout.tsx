@@ -2,6 +2,7 @@ import React, { type ComponentType } from "react";
 import { Outlet, useLocation } from "react-router";
 import Header from "~/components/Header";
 import Hero from "~/components/Hero";
+import { HydrationFallback } from "~/components/HydrationFallback";
 import AuthNav from "~/components/navbar/AuthNav";
 import HomeNav from "~/components/navbar/HomeNav";
 import ServerStatus from "~/components/navbar/ServerStatus";
@@ -23,7 +24,7 @@ export async function clientLoader() {
 }
 
 export function HydrateFallback() {
-  return <div>Loading...</div>;
+  return <HydrationFallback />;
 }
 
 export default function Layout() {

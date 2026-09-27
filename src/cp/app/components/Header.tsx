@@ -36,7 +36,7 @@ export default function Header() {
         <NavLink to="#" className="btn btn-ghost btn-sm">
           Account
         </NavLink>
-        <NavLink to="#" className="btn btn-ghost btn-sm">
+        <NavLink to="/about" className="btn btn-ghost btn-sm">
           About
         </NavLink>
 

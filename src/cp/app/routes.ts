@@ -17,5 +17,7 @@ export default [
       // route(":city", "./concerts/city.tsx"),
       // route("trending", "./concerts/trending.tsx"),
     ]),
+
+    route("about", "routes/about.tsx"),
   ]),
 ] satisfies RouteConfig;
