@@ -11,11 +11,26 @@ const SIDE_NAV: Record<string, ComponentType> = {
   auth: AuthNav,
 };
 
+const BACKEND_URL = "http://localhost:8000";
+
+export async function clientLoader() {
+  const res = await fetch(`${BACKEND_URL}/api/account`, {
+    credentials: "include",
+    headers: { Accept: "application/json" },
+  });
+
+  return res.ok ? await res.json() : null;
+}
+
+export function HydrateFallback() {
+  return <div>Loading...</div>;
+}
+
 export default function Layout() {
   const { pathname } = useLocation();
   const segments = pathname.split("/");
   const firstSegment = `/${segments[1] || ""}`;
-  const ActiveView = SIDE_NAV[firstSegment] || HomeNav;
+  const ActiveNavBar = SIDE_NAV[firstSegment] || HomeNav;
 
   return (
     <>
@@ -25,7 +40,7 @@ export default function Layout() {
         <aside className="md:sticky md:top-20 order-last md:order-first">
           <div className="card bg-base-200 border border-base-300 mb-4">
             <div className="card-body p-0" id="sidenav">
-              <ActiveView />
+              <ActiveNavBar />
             </div>
           </div>
           <ServerStatus />
