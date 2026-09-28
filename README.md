@@ -1,6 +1,7 @@
 # RunPi rAthReST
+Made by **[Project RunPi](https://projectrunpi.com/)**
 
-> 🚧 Just getting started — this is early days, nothing stable yet.
+> 🚧 Just getting started — this is early days, nothing stable yet. And this is the first time im doing this.
 
 **rAthReST** is a **rAthena Request-Response Service Tools**.
 
@@ -14,23 +15,32 @@ It mirrors what FluxCP does for your rAthena server — but built as a full, sta
 
 ## 📁 Structure
 
-\`\`\`
-.devcontainer/  <- VS Code devcontainer config
-docker/         <- Dockerfile(s), nginx conf, etc.
+```
+.devcontainer/      <- VS Code devcontainer config
+docker/             <- Dockerfile(s), nginx conf, etc.
 src/
-    raae/       <- Laravel, the actual rAthReST API
-    cp/         <- reference frontend consuming the API (not part of rAthReST itself)
-\`\`\`
+    rathrest/       <- Laravel, the actual rAthReST API
+    cp/             <- reference frontend consuming the API (not part of rAthReST itself)
+```
 
 `cp/` is just an example client to prove the API works standalone — the API doesn't depend on it, and any frontend could take its place.
 
 ## 🧩 Current Focus
 
-First milestone: authentication and an account viewer, using Laravel Sanctum for token-based auth.
+### Milestone 1: Authentication and an account viewer, using Laravel Sanctum for token-based auth.
+- ✅ Register
+- ✅ Login / Logout
+- 🔲 View authenticated account details
+- [ ] Adding News for higher roles
 
-- Register
-- Login / Logout
-- View authenticated account details
+### Milestone 2: User Profile Management
+- [ ] Update profile information (name, email)
+- [ ] Change password functionality
+
+### Milestone 3: Core Application Features
+- [ ] Server Status (onlinem offline)
+- [ ] Additional server Status
+
 
 ## 📄 License
 
@@ -38,4 +48,3 @@ MIT
 
 ---
 
-Made by **[Project RunPi](https://projectrunpi.com/)**

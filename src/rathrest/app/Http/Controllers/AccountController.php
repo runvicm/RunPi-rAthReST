@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
-    public function account(Request $request) {
+    public function account(Request $request)
+    {
 
         $login = $request->user();
 
@@ -14,6 +15,5 @@ class AccountController extends Controller
             'userid'   => $login->userid,
             'group_id' => $login->group_id,
         ]);
-
     }
 }

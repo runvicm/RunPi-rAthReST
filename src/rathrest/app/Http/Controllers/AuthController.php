@@ -48,7 +48,6 @@ class AuthController extends Controller
     }
 
 
-
     /**
      * Log in using session/cookie auth (Sanctum SPA mode).
      */
@@ -94,10 +93,6 @@ class AuthController extends Controller
             ],
         ]);
     }
-
-
-
-
 
 
     public function logout(Request $request)
