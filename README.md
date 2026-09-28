@@ -28,9 +28,9 @@ src/
 ## 🧩 Current Focus
 
 ### Milestone 1: Authentication and an account viewer, using Laravel Sanctum for token-based auth.
-- ✅ Register
-- ✅ Login / Logout
-- 🔲 View authenticated account details
+- [x] Register
+- [x] Login / Logout
+- [ ] View authenticated account details
 - [ ] Adding News for higher roles
 
 ### Milestone 2: User Profile Management
