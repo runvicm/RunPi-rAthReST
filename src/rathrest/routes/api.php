@@ -24,7 +24,9 @@ Route::prefix('/auth')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('/account')->group(function () {
-        Route::get('/', [AccountController::class, 'account'])->middleware('throttle:accont');
+        Route::get('/', [AccountController::class, 'account'])->middleware('throttle:account');
+        Route::get('/view', [AccountController::class, 'view']);
+        Route::get('/characters', [AccountController::class, 'characters']);
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);

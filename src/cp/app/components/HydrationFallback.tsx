@@ -32,7 +32,7 @@ export function HydrationFallback() {
 
         <div className="text-center">
           <p className="font-extrabold text-lg tracking-tight">
-            Custom<span className="text-primary">CP</span>
+            rAthReST <span className="text-primary">CP</span>
           </p>
           <p className="text-sm text-base-content/60 mt-1 min-height: 1.25rem transition-opacity">
             {LINES[line]}

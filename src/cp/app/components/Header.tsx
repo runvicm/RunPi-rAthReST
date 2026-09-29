@@ -33,7 +33,7 @@ export default function Header() {
             </li>
           </ul>
         </div>
-        <NavLink to="#" className="btn btn-ghost btn-sm">
+        <NavLink to="/account/view" className="btn btn-ghost btn-sm">
           Account
         </NavLink>
         <NavLink to="/about" className="btn btn-ghost btn-sm">

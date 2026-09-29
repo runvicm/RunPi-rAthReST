@@ -23,4 +23,10 @@ class Login extends Authenticatable
     protected $table = 'login';
     protected $primaryKey = 'account_id';
     public $timestamps = false;
+
+
+    public function chars()
+    {
+        return $this->hasMany(Char::class, 'account_id', 'account_id');
+    }
 }

@@ -43,7 +43,7 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Account created successfully',
-            'account_id' => $login->account_id,
+            'username' => $login->userid,   #return username
         ], 201);
     }
 
@@ -86,11 +86,6 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Login successful',
-            'account' => [
-                'account_id' => $login->account_id,
-                'userid'     => $login->userid,
-                'group_id'   => $login->group_id,
-            ],
         ]);
     }
 

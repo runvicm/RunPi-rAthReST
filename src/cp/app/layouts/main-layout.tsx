@@ -3,25 +3,26 @@ import { Outlet, useLocation } from "react-router";
 import Header from "~/components/Header";
 import Hero from "~/components/Hero";
 import { HydrationFallback } from "~/components/HydrationFallback";
-import AuthNav from "~/components/navbar/AuthNav";
+import AccountNav from "~/components/navbar/AccountNav";
+import AuthNav from "~/components/navbar/AccountNav";
 import HomeNav from "~/components/navbar/HomeNav";
 import ServerStatus from "~/components/navbar/ServerStatus";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const SIDE_NAV: Record<string, ComponentType> = {
   "/": HomeNav,
-  auth: AuthNav,
+  "/account": AccountNav,
 };
 
-const BACKEND_URL = "http://localhost:8000";
-
 export async function clientLoader() {
-  const res = await fetch(`${BACKEND_URL}/api/account`, {
+  const res = await fetch(`${API_URL}/api/account`, {
     credentials: "include",
     headers: { Accept: "application/json" },
   });
-
   return res.ok ? await res.json() : null;
 }
+clientLoader.hydrate = true as const;
 
 export function HydrateFallback() {
   return <HydrationFallback />;
@@ -31,25 +32,15 @@ export default function Layout() {
   const { pathname } = useLocation();
   const segments = pathname.split("/");
   const firstSegment = `/${segments[1] || ""}`;
-  const ActiveNavBar = SIDE_NAV[firstSegment] || HomeNav;
+  const Navbar = SIDE_NAV[firstSegment] || HomeNav;
+
+  console.log(firstSegment);
 
   return (
     <>
       <Header />
       <Hero />
-      <div className="max-w-6xl mx-auto px-4 md:px-8 grid md:grid-cols-[240px_1fr] gap-8 py-8 items-start">
-        <aside className="md:sticky md:top-20 order-last md:order-first">
-          <div className="card bg-base-200 border border-base-300 mb-4">
-            <div className="card-body p-0" id="sidenav">
-              <ActiveNavBar />
-            </div>
-          </div>
-          <ServerStatus />
-        </aside>
-        <main>
-          <Outlet />
-        </main>
-      </div>
+      <Outlet />
     </>
   );
 }

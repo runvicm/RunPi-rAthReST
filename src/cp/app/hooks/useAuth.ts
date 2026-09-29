@@ -55,7 +55,7 @@ export function useAuth() {
           return false;
         }
 
-        navigate("/account");
+        navigate("/account/view");
         return true;
       } catch (err) {
         setError("Network error — please try again");

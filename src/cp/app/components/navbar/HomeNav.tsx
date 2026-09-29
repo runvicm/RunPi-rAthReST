@@ -1,28 +1,22 @@
-import { Link } from "react-router";
+import {
+  IconDownload,
+  IconInfoCircle,
+  IconInfoHexagon,
+  IconNews,
+} from "@tabler/icons-react";
+import { NavSection, type NavItem } from "./NavSection";
+
+const homeLinks: NavItem[] = [
+  { to: "/", label: "News", icon: IconNews },
+  { to: "/info", label: "Server Info", icon: IconInfoCircle },
+  { to: "/download", label: "Download", icon: IconDownload },
+  { to: "/rules", label: "Rules", icon: IconInfoHexagon },
+];
 
 export default function HomeNav() {
   return (
-    <ul className="menu menu-paged menu-vertical bg-base-200 rounded-box w-56 lg:w-auto gap-2">
-      <li>
-        <Link to="#" className="">
-          News
-        </Link>
-      </li>
-      <li>
-        <Link to="#" className="">
-          Server Info
-        </Link>
-      </li>
-      <li>
-        <Link to="#" className="">
-          Rules
-        </Link>
-      </li>
-      <li>
-        <Link to="#" className="">
-          Download
-        </Link>
-      </li>
-    </ul>
+    <nav className="flex flex-col gap-4">
+      <NavSection title="Account" links={homeLinks} />
+    </nav>
   );
 }
