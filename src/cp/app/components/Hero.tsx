@@ -19,41 +19,13 @@ export default function Hero() {
                 Download Client
               </a>
             </div>
-            <div className="stats stats-vertical sm:stats-horizontal shadow bg-base-200 border border-base-300 mt-12 md:mt-16">
-              <div className="stat py-3 px-4">
-                <div className="stat-title text-xs">Login</div>
-                <div className="stat-value text-success text-base">
-                  &#9679; Online
+            <div className="flex items-center gap-6 mt-8">
+              {["Login", "Char", "Map"].map((label) => (
+                <div key={label} className="flex items-center gap-2 text-sm">
+                  <span className="badge badge-success badge-xs" />
+                  <span className="text-base-content/60">{label}</span>
                 </div>
-              </div>
-              <div className="stat py-3 px-4">
-                <div className="stat-title text-xs">Char</div>
-                <div className="stat-value text-success text-base">
-                  &#9679; Online
-                </div>
-              </div>
-              <div className="stat py-3 px-4">
-                <div className="stat-title text-xs">Map</div>
-                <div className="stat-value text-success text-base">
-                  &#9679; Online
-                </div>
-              </div>
-              <div className="stat py-3 px-4">
-                <div className="stat-title text-xs">Players online</div>
-                <div className="stat-value text-base">1,284</div>
-              </div>
-              <div className="stat py-3 px-4">
-                <div className="stat-title text-xs">Mode</div>
-                <div className="stat-value text-base">Renewal</div>
-              </div>
-              <div className="stat py-3 px-4">
-                <div className="stat-title text-xs">Rates</div>
-                <div className="stat-value text-base">50x/50x/5x</div>
-              </div>
-              <div className="stat py-3 px-4">
-                <div className="stat-title text-xs">Max level</div>
-                <div className="stat-value text-base">99/70</div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

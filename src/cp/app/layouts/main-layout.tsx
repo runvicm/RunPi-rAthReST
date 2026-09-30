@@ -1,19 +1,15 @@
-import React, { type ComponentType } from "react";
 import { Outlet, useLocation } from "react-router";
+import Footer from "~/components/Footer";
 import Header from "~/components/Header";
 import Hero from "~/components/Hero";
 import { HydrationFallback } from "~/components/HydrationFallback";
-import AccountNav from "~/components/navbar/AccountNav";
-import AuthNav from "~/components/navbar/AccountNav";
-import HomeNav from "~/components/navbar/HomeNav";
-import ServerStatus from "~/components/navbar/ServerStatus";
+import PageHero from "~/components/PageHero";
+
+const TITLES: Record<string, string> = {
+  "/auth": "News",
+};
 
 const API_URL = import.meta.env.VITE_API_URL;
-
-const SIDE_NAV: Record<string, ComponentType> = {
-  "/": HomeNav,
-  "/account": AccountNav,
-};
 
 export async function clientLoader() {
   const res = await fetch(`${API_URL}/api/account`, {
@@ -30,17 +26,15 @@ export function HydrateFallback() {
 
 export default function Layout() {
   const { pathname } = useLocation();
-  const segments = pathname.split("/");
-  const firstSegment = `/${segments[1] || ""}`;
-  const Navbar = SIDE_NAV[firstSegment] || HomeNav;
-
-  console.log(firstSegment);
+  const firstSegment = `/${pathname.split("/")[1] ?? ""}`;
+  const isHome = pathname === "/";
 
   return (
     <>
       <Header />
-      <Hero />
+      {isHome ? <Hero /> : <PageHero title={TITLES[firstSegment] ?? ""} />}
       <Outlet />
+      <Footer />
     </>
   );
 }

@@ -8,7 +8,7 @@ import { NavSection, type NavItem } from "./NavSection";
 
 const homeLinks: NavItem[] = [
   { to: "/", label: "News", icon: IconNews },
-  { to: "/info", label: "Server Info", icon: IconInfoCircle },
+  { to: "/server-info", label: "Server Info", icon: IconInfoCircle },
   { to: "/download", label: "Download", icon: IconDownload },
   { to: "/rules", label: "Rules", icon: IconInfoHexagon },
 ];

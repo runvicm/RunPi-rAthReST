@@ -12,6 +12,10 @@ export default [
       index("routes/home.tsx"),
       route("auth/login", "routes/auth/login.tsx"),
       route("auth/register", "routes/auth/register.tsx"),
+
+      route("server-info", "routes/server-info.tsx"),
+      route("download", "routes/download.tsx"),
+      route("rules", "routes/rules.tsx"),
     ]),
 
     ...prefix("account", [
