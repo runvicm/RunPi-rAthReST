@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\Request;
 
+#[Group('Account', weight: 4)]
 class AccountController extends Controller
 {
 
     /**
-     * Returns the logged-in account's display data.
-     * 
-     * The frontend calls this once, in the main layout. Other layouts and
-     * pages read that result instead of calling it again.
-     * A 401 means "not logged in".
+     * Check authenticated account
+     *
+     * Returns the logged-in account's username and group ID. The frontend calls this once in the main layout, and other layouts and pages reuse that result instead of calling it again.
      */
     public function account(Request $request)
     {
@@ -27,9 +27,10 @@ class AccountController extends Controller
     }
 
     /**
-     * Routes is authenticated.
+     * Account information
+     *
+     * Returns the details of the logged-in account.
      * 
-     * Return Account info
      */
     public function view(Request $request)
     {
@@ -63,15 +64,15 @@ class AccountController extends Controller
             // Base on group_id
             'accountID'  => $login->group_id > '0' ? $login->account_id : null,
             'groupID'    => $login->group_id > '0' ? $login->group_id : null,
-            'characters'    => $login->chars,
         ]);
     }
 
 
     /**
-     * Routes is authenticated.
+     * List account characters
+     *
+     * Returns all characters that belong to the logged-in account.
      * 
-     * Return Account characters
      */
     public function characters(Request $request)
     {
@@ -97,4 +98,10 @@ class AccountController extends Controller
             $characters,
         );
     }
+    /**
+     * Account storage
+     *
+     * Returns the Kafra storage items that belong to the logged-in account.
+     */
+    public function storage() {}
 }

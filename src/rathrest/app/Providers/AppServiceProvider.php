@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use Dedoc\Scramble\Scramble;
+use Dedoc\Scramble\Support\Generator\OpenApi;
+use Dedoc\Scramble\Support\Generator\SecurityScheme;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -41,6 +44,14 @@ class AppServiceProvider extends ServiceProvider
                 config('rathrest.account_throttle_minutes'),
                 config('rathrest.account_throttle_attempts')
             )->by($request->user()?->getAuthIdentifier() ?: $request->ip());
+        });
+
+
+        Scramble::afterOpenApiGenerated(function (OpenApi $openApi) {
+            $openApi->secure(
+                SecurityScheme::apiKey('cookie', config('session.cookie'))
+                    ->setDescription('Log in through `POST /auth/login`. The server sets this cookie automatically, so you don\'t need to copy it by hand.')
+            );
         });
     }
 }

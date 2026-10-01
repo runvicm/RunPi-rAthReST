@@ -2,7 +2,6 @@
 
 return [
 
-
     /**
      * Control Throlling with fallback deafult
      */
@@ -14,4 +13,20 @@ return [
 
     'account_throttle_attempts' => env('ACCOUNT_THROTTLE_ATTEMPTS', 30),
     'account_throttle_minutes'  => env('ACCOUNT_THROTTLE_MINUTES', 1),
+
+
+    'server' => [
+        'login' => [
+            'host' => env('LOGIN_HOST', '127.0.0.1'),
+            'port' => (int) env('LOGIN_PORT', 6900),
+        ],
+        'char' => [
+            'host' => env('CHAR_HOST', '127.0.0.1'),
+            'port' => (int) env('CHAR_PORT', 6121),
+        ],
+        'map' => [
+            'host' => env('MAP_HOST', '127.0.0.1'),
+            'port' => (int) env('MAP_PORT', 5121),
+        ],
+    ],
 ];

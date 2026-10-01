@@ -4,26 +4,44 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Login;
+use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+
+#[Group('Authentication', weight: 3)]
 class AuthController extends Controller
 {
 
     /**
-     * Register a new account into rAthena's login table.
+     * Register a new account
+     * 
+     * @unauthenticated
+     * 
      */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'username'  => 'required|string|min:4|max:23|unique:login,userid',
-            'password'  => 'required|string|min:4|max:31',
+            'password'  => [
+                'required',
+                'string',
+                'min:4',
+                'max:31',
+                function ($attribute, $value, $fail) use ($request) {
+                    $username = (string) $request->input('username');
+
+                    if ($username !== '' && stripos($value, $username) !== false) {
+                        $fail('The password must not contain your username.');
+                    }
+                },
+            ],
             'email'     => 'nullable|email|max:39',
             'gender'    => 'required|in:M,F',
             'birthdate' => 'nullable|date_format:Y-m-d',
         ]);
-
+        // Check fields
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
@@ -31,7 +49,8 @@ class AuthController extends Controller
             ], 422);
         }
 
-        $login = Login::create([
+        // insert to table
+        Login::create([
             'userid'    => $request->username,
             'user_pass' => md5($request->password),
             'email'     => $request->email ?? 'a@a.com', // rAthena default fallback
@@ -43,13 +62,15 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Account created successfully',
-            'username' => $login->userid,   #return username
         ], 201);
     }
 
 
     /**
-     * Log in using session/cookie auth (Sanctum SPA mode).
+     * Log-in account
+     * 
+     * @unauthenticated
+     * 
      */
     public function login(Request $request)
     {
@@ -89,7 +110,12 @@ class AuthController extends Controller
         ]);
     }
 
-
+    /**
+     * Log-out account
+     * 
+     * Log out accoutn and desttro session
+     * 
+     */
     public function logout(Request $request)
     {
         Auth::guard('web')->logout();
