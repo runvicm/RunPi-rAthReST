@@ -4,7 +4,7 @@ import ServerStatus from "~/components/navbar/ServerStatus";
 
 type Account = { username: string; role: number } | null;
 export default function AccountLayout() {
-  const account = useRouteLoaderData<Account>("layouts/main-layout");
+  const account = useRouteLoaderData<Account>("routes/app-layout");
 
   if (!account) return <Navigate to="/auth/login" replace />;
 

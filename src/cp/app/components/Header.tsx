@@ -1,10 +1,10 @@
-import { IconChevronDown } from "@tabler/icons-react";
 import { NavLink, useLoaderData } from "react-router";
 import { useAuth } from "~/hooks/useAuth";
+import type { clientLoader } from "~/routes/app-layout";
 
 export default function Header() {
   const { logout, loading } = useAuth();
-  const account = useLoaderData();
+  const { user } = useLoaderData<typeof clientLoader>();
 
   return (
     <header className="navbar bg-base-200 border-b border-base-300 px-4 md:px-8">
@@ -17,6 +17,9 @@ export default function Header() {
       <nav className="navbar-center hidden md:flex gap-1">
         <NavLink to="/" className="btn btn-ghost btn-sm">
           Home
+        </NavLink>
+        <NavLink to="/account/view" className="btn btn-ghost btn-sm">
+          Account
         </NavLink>
         <NavLink to="/ranking" className="btn btn-ghost btn-sm">
           Ranking
@@ -32,7 +35,7 @@ export default function Header() {
           <span className="hidden sm:inline">Online</span>
         </div>
 
-        {account ? (
+        {user ? (
           <button
             onClick={logout}
             disabled={loading}

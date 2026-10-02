@@ -1,25 +1,30 @@
-import { useAuth } from "~/hooks/useAuth";
+import { auth } from "~/lib/api/auth";
+import type { Route } from "./+types/login";
+import { Form, redirect, useActionData, useNavigation } from "react-router";
+import { ApiError } from "~/lib/api/client";
+
+export async function clientAction({ request }: Route.ClientActionArgs) {
+  const form = await request.formData();
+  try {
+    await auth.login(
+      String(form.get("username")),
+      String(form.get("password")),
+    );
+    return redirect("/account/view");
+  } catch (e) {
+    if (e instanceof ApiError) return { error: e.message, errors: e.errors };
+    return { error: "Network error — please try again" };
+  }
+}
 
 export default function Login() {
-  const { login, loading, error } = useAuth();
-
-  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    await login(
-      formData.get("username") as string,
-      formData.get("password") as string,
-    );
-  }
+  const result = useActionData<typeof clientAction>();
+  const busy = useNavigation().state === "submitting";
 
   return (
-    <form
-      method="post"
-      className="card bg-base-200 border border-base-300 "
-      onSubmit={handleSubmit}
-    >
+    <Form method="post" className="card bg-base-200 border border-base-300 ">
       <div className="card-body gap-3">
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {result?.error && <p style={{ color: "red" }}>{result.error}</p>}
 
         <fieldset className="fieldset">
           <label className="label" htmlFor="username">
@@ -52,9 +57,9 @@ export default function Login() {
         <button
           type="submit"
           className="btn btn-primary mt-2 btn-wide"
-          disabled={loading}
+          disabled={busy}
         >
-          {loading ? "Logging in..." : "Log in"}
+          {busy ? "Logging in..." : "Log in"}
         </button>
         <p className="text-sm text-base-content/60">
           No account yet?{" "}
@@ -63,6 +68,6 @@ export default function Login() {
           </a>
         </p>
       </div>
-    </form>
+    </Form>
   );
 }

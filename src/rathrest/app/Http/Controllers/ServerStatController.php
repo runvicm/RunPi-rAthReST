@@ -25,7 +25,7 @@ class ServerStatController extends Controller
     {
         $status = [];
 
-        foreach (config('rathrest.server') as $name => $s) {
+        foreach (config('rathrest.config.server') as $name => $s) {
             $conn = @fsockopen($s['host'], $s['port'], $errno, $errstr, 1);
             $status[$name] = (bool) $conn;
             if ($conn) {

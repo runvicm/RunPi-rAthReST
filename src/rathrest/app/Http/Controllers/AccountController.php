@@ -27,14 +27,31 @@ class AccountController extends Controller
     }
 
     /**
-     * Account information
+     * View
+     * 
+     * Returns information belong to the logged-in account.
      *
-     * Returns the details of the logged-in account.
+     * @response array{
+     *   "username": string,
+     *   "email": string,
+     *   "gender": "Male" | "Female",
+     *   "state": string,
+     *   "loginCount": number,
+     *   "vipStatus": string,
+     *   "lastLogin": string,
+     *   "creditBalance": number,
+     *   "birthdate": string,
+     *   "lastIP": string,
+     *   "accountID": number,
+     *   "groupID": number
+     * }
      * 
      */
     public function view(Request $request)
     {
         $login = $request->user();
+        $gender = config('rathrest.sex', []);
+        $state = config('rathrest.state', []);
 
         // Vip status came from fluxCP
         $vipStatus = $login->vip_time > '0'
@@ -44,20 +61,12 @@ class AccountController extends Controller
         return response()->json([
             'username'      => $login->userid,
             'email'         => $login->email,
-            'gender'        => match ($login->sex) {
-                'M'         => 'Male',
-                'F'         => 'Female',
-            },
-            'state'         => match ($login->state) {
-                '0'         => 'Normal',
-                '1'         => 'Permanently Banned',
-                '5'         => 'Temporarily Banned',
-                default     => 'Unknown Status',
-            },
+            'gender'        => $gender[$login->sex],
+            'state'         => $state[$login->state],
             'loginCount'    => $login->logincount,
             'vipStatus'     => $vipStatus,
             'lastLogin'     => $login->lastlogin,
-            'creditBalance' => "0", //TODO: need to find how this works
+            'creditBalance' => 0, //TODO: need to find how this works
             'birthdate'     => $login->bithdate,
             'lastIP'        => $login->last_ip,
 
@@ -69,16 +78,28 @@ class AccountController extends Controller
 
 
     /**
-     * List account characters
+     * Characters
      *
      * Returns all characters that belong to the logged-in account.
+     * 
+     * @response array{
+     *   "id": 150000,
+     *   "slot": 1,
+     *   "name": "shadowmage92",
+     *   "jobClass": "Novice",
+     *   "baselvl": 15,
+     *   "joblvl": 10,
+     *   "zeny": "1,100",
+     *   "guild": "Guild Name",
+     *   "online": "Online" | "Offline",
+     * }
      * 
      */
     public function characters(Request $request)
     {
 
         $login = $request->user();
-        $jobNames = config('ro.jobs', []);
+        $jobNames = config('rathrest.jobs', []);
 
         $characters = $login->chars->map(function ($char) use ($jobNames) {
             return [
@@ -86,8 +107,8 @@ class AccountController extends Controller
                 'slot'  => $char->char_num + 1,
                 'name' => $char->name,
                 'jobClass' => $jobNames[$char->class],
-                'baseLevel' => $char->base_level,
-                'jobLevel' => $char->job_level,
+                'baselvl' => $char->base_level,
+                'joblvl' => $char->job_level,
                 'zeny' => $char->zeny,
                 'guild' => ($char->guild_id === 0) ? 'None' : $char->guild->name,
                 'online' => $char->online ? 'Online' : 'Offline',
@@ -99,7 +120,7 @@ class AccountController extends Controller
         );
     }
     /**
-     * Account storage
+     * Storage
      *
      * Returns the Kafra storage items that belong to the logged-in account.
      */
