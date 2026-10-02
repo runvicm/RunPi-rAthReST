@@ -2,22 +2,33 @@ rAthReST Community Fair-Use License
 
 Copyright (c) 2026 Project RunPi (https://projectrunpi.com/)
 
-This project was built to support the rAthena community. It is free to use, 
-modify, and share, with simple rules to ensure it remains free for everyone.
+This project was built to learn and use for my rAthena server. It is free to
+use, modify, and share, with simple rules to keep it free for everyone.
 
-PERMISSIONS:
-1. USE & RUN: Free to download, install, and run on any rAthena server 
-   (including servers with cash shops, VIP, or donations).
-2. MODIFY: Feel free to read, fork, and customize the code for your own server, 
+
+PERMISSIONS
+1. USE & RUN: You may download, install, and run this software on any rAthena
+   server, including servers with cash shops, VIP systems, or donations.
+2. MODIFY: You may read, fork, and customize the code for your own server,
    website, or app.
-3. SHARE: You may share modified or unmodified copies, provided they stay 
-   100% free and include this license notice.
+3. SHARE: You may share modified or unmodified copies, provided they remain
+   free of charge and include this license notice.
 
-RESTRICTIONS:
-- NO SELLING: You may NOT sell, rent, sublicense, or charge money for the source 
-  code or modified versions of this project.
-- NO PAID PACKAGING: Freelancers or agencies may NOT charge clients for this source 
-  code as a paid product.
+RESTRICTIONS
+1. NO SELLING THE SOFTWARE: You may not sell, rent, sublicense, or charge
+   money for this software or for modified versions of it.
+2. NO PAID PACKAGING: You may not bundle this software into a paid product
+   or charge clients for the software itself.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. IN NO EVENT SHALL 
-THE AUTHORS BE LIABLE FOR ANY CLAIM OR DAMAGES.
+YOUR OWN SERVICES ARE FINE
+You may charge for your own work, such as server setup, hosting, custom
+development, or design, as long as you are not charging for this software
+itself. Building a paid website or app that uses this API is allowed.
+
+NO WARRANTY
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

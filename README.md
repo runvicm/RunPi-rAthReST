@@ -1,69 +1,59 @@
 # RunPi rAthReST
-Made by **[Project RunPi](https://projectrunpi.com/)**
 
-> 🚧 **Early Days** — Just getting started, nothing stable yet.
-> This is a learning and portfolio project kept simple on purpose.
+Made by [Project RunPi](https://projectrunpi.com/)
 
-**rAthReST** is a **rAthena Request-Response Service Tool**.
+> 🚧 **Early days.** Just getting started, nothing stable yet. This is a learning and portfolio project, kept simple on purpose.
 
-It mirrors what FluxCP does for your rAthena server — but built
-as a full, standalone API instead of a bundled panel.
-No fixed frontend: you get the same data and functionality to build
-your own website or dashboard on top of, in whatever stack you like.
+**rAthReST** is a rAthena Request-Response Service Tool.
 
+It covers what FluxCP does for your rAthena server, but as a full, standalone API instead of a bundled panel. There's no fixed frontend: you get the same data and functionality to build your own website or dashboard on top of, in whatever stack you like.
 
-## 🚀 What It's For
+## 🚀 What it's for
 
-* **Headless:** Just an API — pair with React, Vue, Next.js, etc.
-* **Laravel + Eloquent:** Clean way to work with rAthena DB.
-* Built as a learning/portfolio project, kept simple on purpose.
+- **Headless:** just an API. Pair it with React, Vue, Next.js, etc.
+- **Laravel + Eloquent:** a clean way to work with the rAthena database.
+- **Learning project:** built to learn and to show my work, kept simple on purpose.
 
+## 📁 Repository structure
 
-## 📁 Repository Structure
-
-```text
-.devcontainer/      <- VS Code devcontainer config
-docker/             <- Dockerfile(s), Nginx conf, etc.
+```
+.devcontainer/   VS Code devcontainer config
+docker/          Dockerfile(s), Nginx conf, etc.
 src/
-    rathrest/       <- Laravel API (the core service)
-    cp/             <- Reference frontend (standalone client)
-
-
-`cp/` is just an example client to prove the API works standalone — the API doesn't depend on it, and any frontend could take its place.
+  rathrest/      Laravel API (the core service)
+  cp/            Reference frontend (standalone client)
 ```
 
+`cp/` is just an example client to prove the API works standalone. The API doesn't depend on it, and any frontend could take its place.
 
-## 🧩 Current Focus
+## 🧩 Current focus
 
-### Milestone 1: Authentication & Account Viewer
-Using Laravel Sanctum for token-based auth:
+**Milestone 1: Authentication & account viewer** (Laravel Sanctum, token-based)
 - [x] Register
-- [x] Login / Logout
-- [X] View authenticated account details
-- [ ] Character, Storage
+- [x] Login / logout
+- [x] View authenticated account details
+- [ ] Characters, storage
 - [ ] News management for higher roles
 
-### Milestone 2: User Profile Management
+**Milestone 2: User profile management**
 - [ ] Update profile information (name, email)
-- [ ] Change password functionality
+- [ ] Change password
 
-### Milestone 3: Core Application Features
-- [ ] Server Status (online, offline)
-- [ ] Additional server status & metrics
+**Milestone 3: Core application features**
+- [x] Server status (online/offline)
+- [ ] Additional server status and metrics
 
+## 💬 Feedback welcome
+
+This is an early-stage project and I'm learning as I go. Suggestions, critiques, and issues are all appreciated. If you try it on your server and something breaks, please open an issue.
 
 ## ⚠️ Disclaimer
 
-> [!WARNING]
-> **rAthReST** is an independent, open-source project and is
-> **not** affiliated with, endorsed by, or officially connected
-> to the rAthena project or its development team. All product names,
-> trademarks, and registered trademarks belong to their owners.
-
+rAthReST is an independent project and is not affiliated with, endorsed by, or officially connected to the rAthena project or its development team. All product names, trademarks, and registered trademarks belong to their owners.
 
 ## 📄 License
 
-This project is licensed under a **Custom Fair-Use License** (see [LICENSE](LICENSE)).
+This project uses the rAthReST Community Fair-Use License (see [LICENSE](https://github.com/runvicm/RunPi-rAthReST/blob/main/LICENSE)). It's source-available, not open source in the formal sense.
 
-- **✅ Allowed:** Free to use, modify, and run on any rAthena server (including servers with cash shops or VIP).
-- **❌ Prohibited:** Selling the source code, selling modified versions, or charging clients for this API tool.
+- ✅ **Allowed:** free to use, modify, and run on any rAthena server (including servers with cash shops or VIP). You can also charge for your own services, like setup or custom development.
+- ❌ **Not allowed:** selling the source code, selling modified versions, or charging clients for this software itself.
